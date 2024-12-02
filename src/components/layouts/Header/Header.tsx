@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import PostArtile from "../elements/postArticle/PostArticle";
+import PostArtile from "../../elements/postArticle/PostArticle";
 
 const Header = async () => {
   return (
