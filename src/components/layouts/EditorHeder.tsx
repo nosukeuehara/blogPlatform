@@ -1,5 +1,5 @@
 import React from "react";
-import ToggleSwitch from "../elements/TogglePublishSwitch";
+import ToggleSwitch from "../elements/toggleSwitch/TogglePublishSwitch";
 
 const EditorHeder = () => {
   return (
