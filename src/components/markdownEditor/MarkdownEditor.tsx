@@ -1,35 +1,20 @@
 "use client";
-import React, { useState } from "react";
-import MarkdownIt from "markdown-it";
-import styles from "./markdownEditor.module.css";
+import { saveArticle } from "@/feature/action";
+import useMarkdownEditor from "@/hooks/useMarkdownEditor";
+import { useCallback, useState } from "react";
 
 const MarkdownEditor = () => {
-  const [markdown, setMarkdown] = useState("");
-  const md = new MarkdownIt();
-
-  const handleInputChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setMarkdown(event.target.value);
-  };
-
-  const renderMarkdown = () => {
-    return { __html: md.render(markdown) };
-  };
+  const [doc, setDoc] = useState<string>("OKOK");
+  const save = useCallback(async () => {
+    setDoc(doc);
+    console.log(doc);
+    await saveArticle(doc!);
+  }, [doc]);
+  const { editor } = useMarkdownEditor({ doc, setDoc, save });
 
   return (
-    <div style={{ display: "flex", gap: "20px" }}>
-      {/* Markdown入力欄 */}
-      <textarea
-        className={styles.textarea}
-        onChange={handleInputChange}
-      ></textarea>
-
-      {/* HTML表示 */}
-      <div
-        className={styles.previewArea}
-        dangerouslySetInnerHTML={renderMarkdown()}
-      ></div>
+    <div>
+      <div ref={editor} />
     </div>
   );
 };
