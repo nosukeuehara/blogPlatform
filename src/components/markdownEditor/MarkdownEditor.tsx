@@ -22,19 +22,12 @@ const MarkdownEditor = () => {
       {/* Markdown入力欄 */}
       <textarea
         className={styles.textarea}
-        style={{ width: "50%", height: "300px" }}
         onChange={handleInputChange}
       ></textarea>
 
       {/* HTML表示 */}
       <div
-        style={{
-          width: "50%",
-          height: "300px",
-          border: "1px solid #ccc",
-          padding: "10px",
-          overflowY: "auto",
-        }}
+        className={styles.previewArea}
         dangerouslySetInnerHTML={renderMarkdown()}
       ></div>
     </div>
