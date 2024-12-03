@@ -1,26 +1,14 @@
-import Link from "next/link";
 import React from "react";
-import PostArtile from "../../elements/postArticle/PostArticle";
+import SiteIcon from "@/components/elements/siteIcon/SiteIcon";
+import SearchArticles from "@/components/elements/searchArticles/SearchArticles";
+import PostArticle from "../../elements/postArticle/PostArticle";
 
-const Header = async () => {
+const Header = () => {
   return (
     <div>
-      <div>
-        <Link href="/">ho-mu</Link>
-        <div>
-          <div>
-            <Link aria-label="検索" id="header-search" href="/search">
-              検索
-            </Link>
-            <div>
-              <div>
-                <button aria-label="通知">通知</button>
-              </div>
-            </div>
-            <PostArtile />
-          </div>
-        </div>
-      </div>
+      <SiteIcon />
+      <SearchArticles />
+      <PostArticle />
     </div>
   );
 };

@@ -1,0 +1,12 @@
+.newPostBtn {
+  width: fit-content;
+  height: 36px;
+  border-radius: 99rem;
+  border: none;
+  background: rgb(108, 191, 247);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}

@@ -1,4 +1,4 @@
-import EditorHeder from "@/components/layouts/EditorHeader/EditorHeder";
+import EditorHeder from "@/components/layouts/EditorHeader/EditorHeader";
 import React from "react";
 
 // 記事編集ページ

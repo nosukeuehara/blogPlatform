@@ -4,14 +4,16 @@ import ToggleSwitch from "../../elements/toggleSwitch/TogglePublishSwitch";
 import ReactedTextBtn from "../../elements/reactedTextBtn/ReactedTextBtn";
 import ToggleText from "../../elements/toggleText/ToggleText";
 import styles from "./editorHeader.module.css";
+import SaveReturnBtn from "@/components/elements/saveReturnBtn/SaveReturnBtn";
 
-const EditorHeder = () => {
+const EditorHeader = () => {
   const [state, setStatus] = useState<boolean>(false);
   function handleClick() {
     setStatus(!state);
   }
   return (
     <div className={styles.btnSet}>
+      <SaveReturnBtn />
       <ToggleSwitch state={state} handleClick={handleClick} />
       <ReactedTextBtn state={state}>
         <ToggleText
@@ -24,4 +26,4 @@ const EditorHeder = () => {
   );
 };
 
-export default EditorHeder;
+export default EditorHeader;
