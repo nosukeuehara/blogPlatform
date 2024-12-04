@@ -9,21 +9,21 @@ export const generateNewArticle = async () => {
   redirect(`/articles/${slug}/edit`);
 };
 
-export const saveArticle = async (articleData: string) => {
+export const saveArticle = async (articleData: string | null) => {
   try {
     const res = await fetch("/api/article/save", {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json', // Content-Typeを適切な値に変更
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ article: articleData }), // データをリクエストのボディとして送信
+      body: JSON.stringify({ article: articleData }),
     });
 
     if (!res.ok) {
       throw new Error(`Failed to save article: ${res.statusText}`);
     }
 
-    return await res.json(); // サーバーからのレスポンスを返す
+    return await res.json();
   } catch (error) {
     console.error('Error saving article:', error);
     throw new Error('An error occurred while saving the article.');

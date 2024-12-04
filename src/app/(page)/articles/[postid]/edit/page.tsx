@@ -1,12 +1,16 @@
+"use client";
 import MarkdownEditor from "@/components/markdownEditor/MarkdownEditor";
-import React, { Suspense } from "react";
+import MdConverter from "@/components/mdConverter/MdConverter";
+import { useDocContext } from "@/provider/provider";
 
-const page = () => {
+const Page = () => {
+  const [doc, setDoc] = useDocContext();
   return (
-    <Suspense>
-      <MarkdownEditor />
-    </Suspense>
+    <div>
+      <MarkdownEditor doc={doc} setDoc={setDoc} />
+      <MdConverter doc={doc} />
+    </div>
   );
 };
 
-export default page;
+export default Page;

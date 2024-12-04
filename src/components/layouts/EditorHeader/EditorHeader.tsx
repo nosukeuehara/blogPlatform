@@ -11,10 +11,16 @@ const EditorHeader = () => {
   function handleClick() {
     setStatus(!state);
   }
+
   return (
     <div className={styles.btnSet}>
       <SaveReturnBtn />
       <ToggleSwitch state={state} handleClick={handleClick} />
+      <ToggleText
+        state={state}
+        trueState={"公開する"}
+        falseState={"下書き保存"}
+      />
       <ReactedTextBtn state={state}>
         <ToggleText
           state={state}

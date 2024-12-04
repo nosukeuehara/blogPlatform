@@ -8,3 +8,5 @@ export interface ButtonProps {
 export interface ArticleData {
   articleId: UUID
 }
+
+export type SaveStatus = "saved" | "unsaved"

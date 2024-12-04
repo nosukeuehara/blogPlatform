@@ -1,0 +1,16 @@
+/* mdConverter.module.css */
+.ol {
+  padding-left: 20px; /* リストのインデント */
+}
+
+.ol ol {
+  list-style-type: decimal; /* 番号付きリスト */
+}
+
+.ol ul {
+  list-style-type: disc; /* 箇条書きリスト */
+}
+
+.ol li {
+  margin-bottom: 8px; /* 各リストアイテム間のスペース */
+}

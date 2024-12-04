@@ -1,11 +1,12 @@
-import { EditorView } from "@codemirror/view";
-import { keymap, placeholder, ViewUpdate } from "@codemirror/view";
+import { keymap, placeholder, ViewUpdate, EditorView } from "@codemirror/view";
 import { EditorState, StateEffect } from "@codemirror/state";
 import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
 import { useMemo, useRef, useState, useEffect } from "react";
+import { defaultKeymap } from "@codemirror/commands";
+import { useUpdateContext } from "@/provider/provider";
 
 interface UseMarkDownEditorProps {
-  doc: string;
+  doc: null | string;
   setDoc: (doc: string) => void;
   save: () => void;
 }
@@ -15,23 +16,10 @@ export const useMarkdownEditor = ({
   setDoc,
   save,
 }: UseMarkDownEditorProps) => {
-  const editor = useRef(null);
+  const editor = useRef<HTMLDivElement | null>(null);
   const [container, setContainer] = useState<HTMLDivElement>();
   const [view, setView] = useState<EditorView>();
-
-  const enter = (view: EditorView) => {
-    const { state, dispatch } = view;
-    const { from, to } = state.selection.main;
-
-    const transaction = state.update({
-      changes: { from, to, insert: "\n" },
-      selection: { anchor: from + 1, head: from + 1 },
-      scrollIntoView: true,
-    });
-
-    dispatch(transaction);
-    return true;
-  };
+  const setIsUpdated = useUpdateContext()[1];
 
   const customKeymap = useMemo(() => {
     return keymap.of([
@@ -39,17 +27,12 @@ export const useMarkdownEditor = ({
         key: "Mod-s",
         run() {
           save();
+          setIsUpdated("saved");
           return true;
         },
       },
-      {
-        key: "Enter",
-        run(view) {
-          return enter(view);
-        },
-      },
     ]);
-  }, [save]);
+  }, [save, setIsUpdated]);
 
   const updateListener = useMemo(() => {
     return EditorView.updateListener.of((update: ViewUpdate) => {
@@ -58,6 +41,14 @@ export const useMarkdownEditor = ({
       }
     });
   }, [setDoc]);
+
+  const updateListener2 = useMemo(() => {
+    return EditorView.updateListener.of((update: ViewUpdate) => {
+      if (update.docChanged) {
+        setIsUpdated("unsaved");
+      }
+    });
+  }, [setIsUpdated]);
 
   useEffect(() => {
     if (editor.current) {
@@ -69,23 +60,29 @@ export const useMarkdownEditor = ({
   const extensions = useMemo(() => {
     return [
       updateListener,
+      updateListener2,
+      keymap.of(defaultKeymap),
       customKeymap,
       markdown({
         base: markdownLanguage,
-        completeHTMLTags: false,
+        completeHTMLTags: true,
       }),
       EditorView.theme({
-        "&": { height: "300px", backgroundColor: "white" },
+        "&": {
+          height: "300px",
+          backgroundColor: "white",
+          whiteSpace: "pre-wrap",
+        },
         ".cm-scroller": { overflow: "auto" },
       }),
       placeholder("Write in markdown"),
       EditorView.lineWrapping,
-      EditorState.tabSize.of(4),
+      EditorState.tabSize.of(2),
     ];
-  }, [customKeymap, updateListener]);
+  }, [customKeymap, updateListener, updateListener2]);
 
   useEffect(() => {
-    if (!view && container && doc) {
+    if (!view && container && doc !== null) {
       const state = EditorState.create({
         doc,
         extensions,
