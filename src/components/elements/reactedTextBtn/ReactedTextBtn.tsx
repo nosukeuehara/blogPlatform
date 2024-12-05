@@ -1,33 +1,31 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./reactedTextBtn.module.css";
-import { useDocContext, useUpdateContext } from "@/provider/provider";
+import { useDocContext, useUpdatedMdContext } from "@/provider/provider";
 import { saveArticle } from "@/feature/action";
 
 const ReactedTextBtn = ({
-  state,
+  state: publishState,
   children,
 }: {
   state: boolean;
   children: React.ReactNode;
 }) => {
-  const [isUpdated, setIsUpdated] = useUpdateContext();
+  const [saveStatus, setSaveStatus] = useUpdatedMdContext();
   const [doc] = useDocContext();
 
-  useEffect(() => {}, [isUpdated]);
-
-  switch (isUpdated) {
+  switch (saveStatus) {
     case "saved":
   }
   return (
     <button
       onClick={async () => {
         await saveArticle(doc);
-        setIsUpdated("saved");
+        setSaveStatus("saved");
       }}
       className={
-        state || isUpdated === "unsaved"
-          ? `${styles.button_active}`
-          : `${styles.button_default}`
+        publishState || saveStatus === "unsaved"
+          ? `${styles.button_requestSave}`
+          : `${styles.button_saved}`
       }
     >
       {children}

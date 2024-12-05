@@ -1,7 +1,5 @@
 "use client";
-import { saveArticle } from "@/feature/action";
 import useMarkdownEditor from "@/hooks/useMarkdownEditor";
-import { useCallback } from "react";
 
 const MarkdownEditor = ({
   doc,
@@ -10,15 +8,9 @@ const MarkdownEditor = ({
   doc: string | null;
   setDoc: (v: string) => void;
 }) => {
-  const save = useCallback(async () => {
-    if (doc === null) return;
-    await saveArticle(doc);
-  }, [doc]);
-
   const { editor } = useMarkdownEditor({
     doc,
     setDoc,
-    save,
   });
 
   return (

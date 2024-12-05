@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { useUpdateContext } from "@/provider/provider";
+import { useUpdatedMdContext } from "@/provider/provider";
 import { useRouter } from "next/navigation";
 import styles from "./saveReturnBtn.module.css";
 
 const SaveReturnBtn = () => {
-  const [isUpdated] = useUpdateContext();
+  const [isUpdated] = useUpdatedMdContext();
   const router = useRouter();
 
   // ページ遷移前に警告を表示

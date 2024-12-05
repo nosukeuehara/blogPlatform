@@ -18,7 +18,7 @@ export const UpdateProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const useUpdateContext = () => {
+export const useUpdatedMdContext = () => {
   const context = useContext(UpdateContext);
   if (!context) {
     throw new Error("useUpdateContext must be used within an UpdateProvider");

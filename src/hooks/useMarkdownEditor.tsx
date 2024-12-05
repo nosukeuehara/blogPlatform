@@ -1,25 +1,26 @@
 import { keymap, placeholder, ViewUpdate, EditorView } from "@codemirror/view";
 import { EditorState, StateEffect } from "@codemirror/state";
 import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useMemo, useRef, useState, useEffect, useCallback } from "react";
 import { defaultKeymap } from "@codemirror/commands";
-import { useUpdateContext } from "@/provider/provider";
+import { useUpdatedMdContext } from "@/provider/provider";
+import { saveArticle } from "@/feature/action";
 
 interface UseMarkDownEditorProps {
   doc: null | string;
   setDoc: (doc: string) => void;
-  save: () => void;
 }
 
-export const useMarkdownEditor = ({
-  doc,
-  setDoc,
-  save,
-}: UseMarkDownEditorProps) => {
+export const useMarkdownEditor = ({ doc, setDoc }: UseMarkDownEditorProps) => {
   const editor = useRef<HTMLDivElement | null>(null);
   const [container, setContainer] = useState<HTMLDivElement>();
   const [view, setView] = useState<EditorView>();
-  const setIsUpdated = useUpdateContext()[1];
+  const setSaveStatus = useUpdatedMdContext()[1];
+
+  const save = useCallback(async () => {
+    if (doc === null) return;
+    await saveArticle(doc);
+  }, [doc]);
 
   const customKeymap = useMemo(() => {
     return keymap.of([
@@ -27,12 +28,12 @@ export const useMarkdownEditor = ({
         key: "Mod-s",
         run() {
           save();
-          setIsUpdated("saved");
+          setSaveStatus("saved");
           return true;
         },
       },
     ]);
-  }, [save, setIsUpdated]);
+  }, [save, setSaveStatus]);
 
   const updateListener = useMemo(() => {
     return EditorView.updateListener.of((update: ViewUpdate) => {
@@ -45,16 +46,16 @@ export const useMarkdownEditor = ({
   const updateListener2 = useMemo(() => {
     return EditorView.updateListener.of((update: ViewUpdate) => {
       if (update.docChanged) {
-        setIsUpdated("unsaved");
+        setSaveStatus("unsaved");
       }
     });
-  }, [setIsUpdated]);
+  }, [setSaveStatus]);
 
   useEffect(() => {
     if (editor.current) {
       setContainer(editor.current);
     }
-  }, [setContainer]);
+  }, []);
 
   // エディタ拡張機能を設定
   const extensions = useMemo(() => {
