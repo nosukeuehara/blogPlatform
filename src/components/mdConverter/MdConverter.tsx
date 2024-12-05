@@ -9,7 +9,6 @@ const MdConverter = ({ doc }: { doc: string | null }) => {
     linkify: true, // URLをリンクに変換
   });
   if (doc === null) return;
-  console.log(doc);
   const htmlContent = md.render(doc);
   return (
     <div>

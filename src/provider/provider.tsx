@@ -8,15 +8,16 @@ const UpdateContext = createContext<{
 } | null>(null);
 
 export const UpdateProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isUpdated, setIsUpdated] = useState<SaveStatus>("saved");
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>("saved");
   return (
-    <UpdateContext.Provider value={{ isUpdated, setIsUpdated }}>
+    <UpdateContext.Provider
+      value={{ isUpdated: saveStatus, setIsUpdated: setSaveStatus }}
+    >
       {children}
     </UpdateContext.Provider>
   );
 };
 
-// Context を使って isUpdated の状態を取得するカスタムフック
 export const useUpdateContext = () => {
   const context = useContext(UpdateContext);
   if (!context) {
@@ -40,11 +41,10 @@ export const DocProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// Context を使って isUpdated の状態を取得するカスタムフック
 export const useDocContext = () => {
   const context = useContext(DocContext);
   if (!context) {
     throw new Error("useUpdateContext must be used within an UpdateProvider");
   }
-  return [context.doc, context.setDoc] as const; // 'as const' を追加
+  return [context.doc, context.setDoc] as const;
 };

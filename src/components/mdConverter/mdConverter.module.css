@@ -14,3 +14,17 @@
 .ol li {
   margin-bottom: 8px; /* 各リストアイテム間のスペース */
 }
+
+.ol {
+  margin-left: 20px; /* リストの余白調整 */
+  font-family: Arial, sans-serif; /* フォント調整 */
+}
+
+.ol ul,
+.ol ol {
+  margin-left: 20px; /* 入れ子リストの余白 */
+}
+
+.ol li {
+  line-height: 1.5; /* 行間を調整 */
+}
