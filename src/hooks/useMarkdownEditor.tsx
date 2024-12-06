@@ -5,10 +5,11 @@ import { useMemo, useRef, useState, useEffect, useCallback } from "react";
 import { defaultKeymap } from "@codemirror/commands";
 import { useUpdatedMdContext } from "@/provider/provider";
 import { saveArticle } from "@/feature/action";
+import { ArticleData } from "@/types/types";
 
 interface UseMarkDownEditorProps {
-  doc: null | string;
-  setDoc: (doc: string) => void;
+  doc: ArticleData;
+  setDoc: (doc: ArticleData) => void;
 }
 
 export const useMarkdownEditor = ({ doc, setDoc }: UseMarkDownEditorProps) => {
@@ -38,10 +39,14 @@ export const useMarkdownEditor = ({ doc, setDoc }: UseMarkDownEditorProps) => {
   const updateListener = useMemo(() => {
     return EditorView.updateListener.of((update: ViewUpdate) => {
       if (update.docChanged) {
-        setDoc(update.state.doc.toString());
+        setDoc({
+          title: doc.title,
+          content: update.state.doc.toString(),
+          published: false,
+        });
       }
     });
-  }, [setDoc]);
+  }, [doc.title, setDoc]);
 
   const updateListener2 = useMemo(() => {
     return EditorView.updateListener.of((update: ViewUpdate) => {
@@ -83,9 +88,9 @@ export const useMarkdownEditor = ({ doc, setDoc }: UseMarkDownEditorProps) => {
   }, [customKeymap, updateListener, updateListener2]);
 
   useEffect(() => {
-    if (!view && container && doc !== null) {
+    if (!view && container && doc.content !== null) {
       const state = EditorState.create({
-        doc,
+        doc: doc.content,
         extensions,
       });
       const viewCurrent = new EditorView({

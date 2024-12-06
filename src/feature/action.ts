@@ -1,22 +1,25 @@
-import { redirect } from "next/navigation";
+import { ArticleData } from "@/types/types";
 
 // 記事新規作成
 export const generateNewArticle = async () => {
   const { slug } = await fetch("/api/article/new", {
     method: 'POST'
   }).then(res => res.json())
-
-  redirect(`/articles/${slug}/edit`);
+  return slug
 };
 
-export const saveArticle = async (articleData: string | null) => {
+export const saveArticle = async (articleData: ArticleData) => {
   try {
     const res = await fetch("/api/article/save", {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ article: articleData }),
+      body: JSON.stringify({
+        title: articleData.title,
+        content: articleData.content,
+        published: articleData.published
+      }),
     });
 
     if (!res.ok) {

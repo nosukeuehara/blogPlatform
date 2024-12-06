@@ -1,5 +1,5 @@
 "use client";
-import { SaveStatus } from "@/types/types";
+import { ArticleData, SaveStatus } from "@/types/types";
 import React, { createContext, useState, useContext } from "react";
 
 const UpdateContext = createContext<{
@@ -27,12 +27,16 @@ export const useUpdatedMdContext = () => {
 };
 
 const DocContext = createContext<{
-  doc: null | string;
-  setDoc: (value: string) => void;
+  doc: ArticleData;
+  setDoc: (value: ArticleData) => void;
 } | null>(null);
 
 export const DocProvider = ({ children }: { children: React.ReactNode }) => {
-  const [doc, setDoc] = useState<null | string>("");
+  const [doc, setDoc] = useState<ArticleData>({
+    title: "",
+    content: "",
+    published: false,
+  });
 
   return (
     <DocContext.Provider value={{ doc, setDoc }}>

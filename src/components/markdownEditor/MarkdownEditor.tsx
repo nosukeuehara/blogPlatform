@@ -1,12 +1,13 @@
 "use client";
 import useMarkdownEditor from "@/hooks/useMarkdownEditor";
+import { ArticleData } from "@/types/types";
 
 const MarkdownEditor = ({
   doc,
   setDoc,
 }: {
-  doc: string | null;
-  setDoc: (v: string) => void;
+  doc: ArticleData;
+  setDoc: (v: ArticleData) => void;
 }) => {
   const { editor } = useMarkdownEditor({
     doc,

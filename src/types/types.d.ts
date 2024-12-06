@@ -1,4 +1,4 @@
-import { UUID } from "crypto"
+import { ArticleData } from '@/types/types';
 
 export interface ButtonProps {
   btnText: string
@@ -6,7 +6,9 @@ export interface ButtonProps {
 }
 
 export interface ArticleData {
-  articleId: UUID
+  title: string,
+  content: string,
+  published: boolean
 }
 
 export type SaveStatus = "saved" | "unsaved"

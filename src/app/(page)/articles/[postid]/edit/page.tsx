@@ -7,6 +7,17 @@ const Page = () => {
   const [doc, setDoc] = useDocContext();
   return (
     <div>
+      <div>
+        <input
+          type="text"
+          onChange={(e) =>
+            setDoc({
+              ...doc,
+              title: e.target.value,
+            })
+          }
+        />
+      </div>
       <MarkdownEditor doc={doc} setDoc={setDoc} />
       <MdConverter doc={doc} />
     </div>

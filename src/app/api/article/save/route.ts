@@ -1,16 +1,34 @@
+import { db } from '@/db/db';
+import { ArticleData } from '@/types/types';
 import { NextResponse } from 'next/server';
 
-export async function PUT(request: Request) {
+export async function PUT(request: ArticleRequest) {
   try {
-    const res = await request.json();
-    console.log(res);
+    const res: ArticleData = await request.json();
 
-    return NextResponse.json({ status: 204, statusText: 'success' });
+    await db.post.create({
+      data: {
+        title: res.title,
+        content: res.content,
+        published: res.published,
+      },
+    });
+
+
+    return NextResponse.json({ status: 204, statusText: 'Success' });
   } catch (error) {
-    console.error('Error:', error);
+    if (error instanceof Error) {
+      return NextResponse.json(
+        { status: 500, statusText: 'Server Error', message: error.message },
+        { status: 500 }
+      );
+    }
 
-    return NextResponse.json(
-      { status: 409, statusText: 'Error', message: 'Invalid request data' }
-    );
   }
+}
+
+interface ArticleRequest extends Request {
+  title: string,
+  content: string,
+  published: boolean
 }
