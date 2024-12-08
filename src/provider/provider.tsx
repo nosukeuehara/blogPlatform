@@ -33,6 +33,7 @@ const DocContext = createContext<{
 
 export const DocProvider = ({ children }: { children: React.ReactNode }) => {
   const [doc, setDoc] = useState<ArticleData>({
+    id: "",
     title: "",
     content: "",
     published: false,

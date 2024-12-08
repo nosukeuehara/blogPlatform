@@ -3,13 +3,16 @@ import useMarkdownEditor from "@/hooks/useMarkdownEditor";
 import { ArticleData } from "@/types/types";
 
 const MarkdownEditor = ({
+  articleId,
   doc,
   setDoc,
 }: {
+  articleId: string
   doc: ArticleData;
   setDoc: (v: ArticleData) => void;
 }) => {
   const { editor } = useMarkdownEditor({
+    articleId,
     doc,
     setDoc,
   });

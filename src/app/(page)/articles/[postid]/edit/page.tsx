@@ -2,8 +2,10 @@
 import MarkdownEditor from "@/components/markdownEditor/MarkdownEditor";
 import MdConverter from "@/components/mdConverter/MdConverter";
 import { useDocContext } from "@/provider/provider";
+import { useParams } from "next/navigation";
 
 const Page = () => {
+  const { slug } = useParams();
   const [doc, setDoc] = useDocContext();
   return (
     <div>
@@ -18,7 +20,7 @@ const Page = () => {
           }
         />
       </div>
-      <MarkdownEditor doc={doc} setDoc={setDoc} />
+      <MarkdownEditor articleId={slug} doc={doc} setDoc={setDoc} />
       <MdConverter doc={doc} />
     </div>
   );
