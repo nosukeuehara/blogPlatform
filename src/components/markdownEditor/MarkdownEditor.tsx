@@ -1,18 +1,15 @@
 "use client";
 import useMarkdownEditor from "@/hooks/useMarkdownEditor";
-import { ArticleData } from "@/types/types";
+import { useDocContext } from "@/provider/provider";
+import { usePathname } from "next/navigation";
 
-const MarkdownEditor = ({
-  articleId,
-  doc,
-  setDoc,
-}: {
-  articleId: string
-  doc: ArticleData;
-  setDoc: (v: ArticleData) => void;
-}) => {
+const MarkdownEditor = () => {
+  const [doc, setDoc] = useDocContext();
+  const pathname = usePathname();
+  const slug = pathname.split("/")[2];
+  console.log(slug);
   const { editor } = useMarkdownEditor({
-    articleId,
+    articleId: slug,
     doc,
     setDoc,
   });
@@ -20,6 +17,15 @@ const MarkdownEditor = ({
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       <div>
+        <input
+          type="text"
+          onChange={(e) =>
+            setDoc({
+              ...doc,
+              title: e.target.value,
+            })
+          }
+        />
         <h3>Markdown Editor</h3>
         <div>
           <div ref={editor} />

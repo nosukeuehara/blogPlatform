@@ -6,8 +6,11 @@ export async function PUT(request: ArticleRequest) {
   try {
     const res: ArticleData = await request.json();
 
+    console.log(res)
+
     await db.post.create({
       data: {
+        id: res.id,
         title: res.title,
         content: res.content,
         published: res.published,
@@ -28,6 +31,7 @@ export async function PUT(request: ArticleRequest) {
 }
 
 interface ArticleRequest extends Request {
+  id: string,
   title: string,
   content: string,
   published: boolean

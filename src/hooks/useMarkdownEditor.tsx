@@ -8,12 +8,16 @@ import { saveArticle } from "@/feature/action";
 import { ArticleData } from "@/types/types";
 
 interface UseMarkDownEditorProps {
-  articleId: string,
+  articleId: string;
   doc: ArticleData;
   setDoc: (doc: ArticleData) => void;
 }
 
-export const useMarkdownEditor = ({ articldId, doc, setDoc }: UseMarkDownEditorProps) => {
+export const useMarkdownEditor = ({
+  articleId,
+  doc,
+  setDoc,
+}: UseMarkDownEditorProps) => {
   const editor = useRef<HTMLDivElement | null>(null);
   const [container, setContainer] = useState<HTMLDivElement>();
   const [view, setView] = useState<EditorView>();
@@ -41,14 +45,14 @@ export const useMarkdownEditor = ({ articldId, doc, setDoc }: UseMarkDownEditorP
     return EditorView.updateListener.of((update: ViewUpdate) => {
       if (update.docChanged) {
         setDoc({
-          id: doc.id,
+          id: articleId,
           title: doc.title,
           content: update.state.doc.toString(),
           published: false,
         });
       }
     });
-  }, [doc.id, doc.title, setDoc]);
+  }, [articleId, doc.title, setDoc]);
 
   const updateListener2 = useMemo(() => {
     return EditorView.updateListener.of((update: ViewUpdate) => {
