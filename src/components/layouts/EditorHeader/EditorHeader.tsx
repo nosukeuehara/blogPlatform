@@ -7,7 +7,7 @@ import styles from "./editorHeader.module.css";
 import SaveReturnBtn from "@/components/elements/saveReturnBtn/SaveReturnBtn";
 import { useDocContext } from "@/provider/provider";
 
-const EditorHeader = () => {
+const EditorHeader = ({ postid }: { postid: string }) => {
   const [doc, setDoc] = useDocContext();
   function handleClick() {
     setDoc({
@@ -25,7 +25,7 @@ const EditorHeader = () => {
         trueState={"公開する"}
         falseState={"下書き保存"}
       />
-      <ReactedTextBtn state={doc.published}>
+      <ReactedTextBtn state={doc.published} postid={postid}>
         <ToggleText
           state={doc.published}
           trueState={"公開する"}

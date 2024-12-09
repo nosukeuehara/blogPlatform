@@ -6,9 +6,9 @@ import { useDocContext } from "@/provider/provider";
 
 const MdConverter = () => {
   const md = new MarkdownIt({
-    html: true, // HTMLタグを許可
-    breaks: true, // 改行を <br> に変換
-    linkify: true, // URLをリンクに変換
+    html: true,
+    breaks: true,
+    linkify: true,
   });
 
   const [doc] = useDocContext();

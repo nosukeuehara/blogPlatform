@@ -6,8 +6,6 @@ export async function PUT(request: ArticleRequest) {
   try {
     const res: ArticleData = await request.json();
 
-    console.log(res)
-
     await db.post.create({
       data: {
         id: res.id,

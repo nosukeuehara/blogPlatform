@@ -5,9 +5,11 @@ import { saveArticle } from "@/feature/action";
 
 const ReactedTextBtn = ({
   state: publishState,
+  postid,
   children,
 }: {
   state: boolean;
+  postid: string;
   children: React.ReactNode;
 }) => {
   const [saveStatus, setSaveStatus] = useUpdatedMdContext();
@@ -19,7 +21,10 @@ const ReactedTextBtn = ({
   return (
     <button
       onClick={async () => {
-        await saveArticle(doc);
+        await saveArticle({
+          id: postid,
+          ...doc,
+        });
         setSaveStatus("saved");
       }}
       className={

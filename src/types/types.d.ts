@@ -1,15 +1,18 @@
-import { ArticleData } from "@/types/types";
+import { ArticleDoc } from "@/types/types";
 
 export interface ButtonProps {
   btnText: string;
   link: string;
 }
 
-export interface ArticleData {
-  id: string;
+export interface ArticleDoc {
   title: string;
   content: string;
   published: boolean;
+}
+
+export interface ArticleData extends ArticleDoc {
+  id: string
 }
 
 export type SaveStatus = "saved" | "unsaved";

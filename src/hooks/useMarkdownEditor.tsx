@@ -5,12 +5,12 @@ import { useMemo, useRef, useState, useEffect, useCallback } from "react";
 import { defaultKeymap } from "@codemirror/commands";
 import { useUpdatedMdContext } from "@/provider/provider";
 import { saveArticle } from "@/feature/action";
-import { ArticleData } from "@/types/types";
+import { ArticleDoc } from "@/types/types";
 
 interface UseMarkDownEditorProps {
   articleId: string;
-  doc: ArticleData;
-  setDoc: (doc: ArticleData) => void;
+  doc: ArticleDoc;
+  setDoc: (doc: ArticleDoc) => void;
 }
 
 export const useMarkdownEditor = ({
@@ -25,8 +25,11 @@ export const useMarkdownEditor = ({
 
   const save = useCallback(async () => {
     if (doc === null) return;
-    await saveArticle(doc);
-  }, [doc]);
+    await saveArticle({
+      id: articleId,
+      ...doc,
+    });
+  }, [articleId, doc]);
 
   const customKeymap = useMemo(() => {
     return keymap.of([
@@ -45,14 +48,13 @@ export const useMarkdownEditor = ({
     return EditorView.updateListener.of((update: ViewUpdate) => {
       if (update.docChanged) {
         setDoc({
-          id: articleId,
           title: doc.title,
           content: update.state.doc.toString(),
           published: false,
         });
       }
     });
-  }, [articleId, doc.title, setDoc]);
+  }, [doc.title, setDoc]);
 
   const updateListener2 = useMemo(() => {
     return EditorView.updateListener.of((update: ViewUpdate) => {

@@ -1,15 +1,12 @@
 "use client";
 import useMarkdownEditor from "@/hooks/useMarkdownEditor";
 import { useDocContext } from "@/provider/provider";
-import { usePathname } from "next/navigation";
 
-const MarkdownEditor = () => {
+const MarkdownEditor = ({ postId }: { postId: string }) => {
+  console.log("記事のID", postId);
   const [doc, setDoc] = useDocContext();
-  const pathname = usePathname();
-  const slug = pathname.split("/")[2];
-  console.log(slug);
   const { editor } = useMarkdownEditor({
-    articleId: slug,
+    articleId: postId,
     doc,
     setDoc,
   });

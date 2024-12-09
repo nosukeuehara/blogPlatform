@@ -1,10 +1,15 @@
 import MarkdownEditor from "@/components/markdownEditor/MarkdownEditor";
 import MdConverter from "@/components/mdConverter/MdConverter";
 
-const Page = () => {
+type Param = {
+  postid: string;
+};
+
+const Page = async ({ params }: { params: Promise<Param> }) => {
+  const postId = (await params).postid;
   return (
     <div>
-      <MarkdownEditor />
+      <MarkdownEditor postId={postId} />
       <MdConverter />
     </div>
   );

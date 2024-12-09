@@ -1,4 +1,4 @@
-import { ArticleData } from "@/types/types";
+import { ArticleData, ArticleDoc } from "@/types/types";
 
 const BASE_URL =
   typeof window === "undefined"
@@ -24,7 +24,7 @@ export const saveArticle = async (articleData: ArticleData) => {
         id: articleData.id,
         title: articleData.title,
         content: articleData.content,
-        published: articleData.published,
+        published: articleData.published
       }),
     });
 
@@ -40,7 +40,7 @@ export const saveArticle = async (articleData: ArticleData) => {
 };
 
 export const getAllArticles = async () => {
-  const articles: ArticleData[] = await fetch(`${BASE_URL}/api/dashboard`).then(
+  const articles: ArticleDoc[] = await fetch(`${BASE_URL}/api/dashboard`).then(
     (res) => res.json()
   );
   return articles;
