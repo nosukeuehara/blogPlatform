@@ -3,8 +3,8 @@ import useMarkdownEditor from "@/hooks/useMarkdownEditor";
 import { useDocContext } from "@/provider/provider";
 
 const MarkdownEditor = ({ postId }: { postId: string }) => {
-  console.log("記事のID", postId);
   const [doc, setDoc] = useDocContext();
+
   const { editor } = useMarkdownEditor({
     articleId: postId,
     doc,
@@ -16,6 +16,7 @@ const MarkdownEditor = ({ postId }: { postId: string }) => {
       <div>
         <input
           type="text"
+          value={doc.title || ""}
           onChange={(e) =>
             setDoc({
               ...doc,

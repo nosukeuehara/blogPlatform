@@ -1,21 +1,12 @@
+import MyArticle from "@/components/elements/myArticle/MyArticle";
 import { getAllArticles } from "@/feature/action";
-import { ArticleDoc } from "@/types/types";
-import Link from "next/link";
+import { ArticleData } from "@/types/types";
 
 const page = async () => {
-  const articles: ArticleDoc[] = await getAllArticles();
-  console.log(articles);
-
+  const articles: ArticleData[] = await getAllArticles();
   return (
     <div>
-      {articles.map((a) => {
-        return (
-          <Link href={`/articles/${a.id}/edit`} key={a.title}>
-            <div className="title">{a.title}</div>
-            <div className="content">{a.content}</div>
-          </Link>
-        );
-      })}
+      <MyArticle props={articles} />
     </div>
   );
 };

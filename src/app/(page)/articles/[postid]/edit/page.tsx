@@ -7,6 +7,7 @@ type Param = {
 
 const Page = async ({ params }: { params: Promise<Param> }) => {
   const postId = (await params).postid;
+
   return (
     <div>
       <MarkdownEditor postId={postId} />

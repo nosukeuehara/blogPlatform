@@ -31,11 +31,27 @@ const DocContext = createContext<{
   setDoc: (value: ArticleDoc) => void;
 } | null>(null);
 
-export const DocProvider = ({ children }: { children: React.ReactNode }) => {
+// TODO: 新規で記事作成時にかなり時間がかかるので原因の調査
+export const DocProvider = ({
+  defaulteArticle,
+  children,
+}: {
+  defaulteArticle: ArticleDoc;
+  children: React.ReactNode;
+}) => {
+  const DefDoc = (): ArticleDoc => {
+    if (defaulteArticle.content) {
+      return defaulteArticle;
+    } else {
+      return {
+        title: "",
+        content: "",
+        published: false,
+      };
+    }
+  };
   const [doc, setDoc] = useState<ArticleDoc>({
-    title: "",
-    content: "",
-    published: false,
+    ...DefDoc(),
   });
 
   return (

@@ -1,0 +1,6 @@
+.myArticleCard:not(:last-child) {
+  display: flex;
+  flex-direction: column;
+  padding: 0.9rem 0 1.2rem;
+  border-bottom: 1px solid #cccccc;
+}
