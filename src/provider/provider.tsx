@@ -1,5 +1,5 @@
 "use client";
-import { ArticleDoc, SaveStatus } from "@/types/types";
+import { ArticleData, ArticleDoc, SaveStatus } from "@/types/types";
 import React, { createContext, useState, useContext } from "react";
 
 const UpdateContext = createContext<{
@@ -36,11 +36,11 @@ export const DocProvider = ({
   defaulteArticle,
   children,
 }: {
-  defaulteArticle: ArticleDoc;
+  defaulteArticle: ArticleData;
   children: React.ReactNode;
 }) => {
   const DefDoc = (): ArticleDoc => {
-    if (defaulteArticle.content) {
+    if (defaulteArticle.id) {
       return defaulteArticle;
     } else {
       return {

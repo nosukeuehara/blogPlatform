@@ -4,10 +4,10 @@ import React, { Suspense } from "react";
 import styles from "./page.module.css";
 import commonStyles from "../../../../common.module.css";
 import { getArticle } from "@/feature/action";
-import { ArticleDoc } from "@/types/types";
+import { ArticleData } from "@/types/types";
 
-const fetchArticleById = async (postid: string): Promise<ArticleDoc> => {
-  const response: ArticleDoc = await getArticle(postid).then((res) =>
+const fetchArticleById = async (postid: string): Promise<ArticleData> => {
+  const response: ArticleData = await getArticle(postid).then((res) =>
     res.json()
   );
   if (!response) {
@@ -24,7 +24,7 @@ const Layout = async ({
   params: { postid: string };
 }>) => {
   const postId = (await params).postid;
-  const article: ArticleDoc = await fetchArticleById(postId);
+  const article: ArticleData = await fetchArticleById(postId);
   return (
     <div className={commonStyles.contentWidth}>
       <UpdateProvider>

@@ -13,8 +13,6 @@ export const generateNewArticle = async () => {
   return slug;
 };
 
-// TODO: 記事取得時にデフォルトのフォーマットを返すようにする
-// サーバー側の実装の修正
 export const getArticle = async (articleId: string) => {
   const article = await fetch(`${BASE_URL}/api/articles/${articleId}/edit`, {
     method: "GET",

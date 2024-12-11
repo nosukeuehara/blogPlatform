@@ -16,7 +16,7 @@ const MarkdownEditor = ({ postId }: { postId: string }) => {
       <div>
         <input
           type="text"
-          value={doc.title || ""}
+          value={doc.title}
           onChange={(e) =>
             setDoc({
               ...doc,

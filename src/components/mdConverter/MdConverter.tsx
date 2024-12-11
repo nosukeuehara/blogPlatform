@@ -12,7 +12,7 @@ const MdConverter = () => {
   });
 
   const [doc] = useDocContext();
-  if (doc === null) return;
+  if (doc.content === null) return;
   const htmlContent = md.render(doc.content);
   return (
     <div>
