@@ -16,9 +16,9 @@ export const generateNewArticle = async () => {
 // TODO: 記事取得時にデフォルトのフォーマットを返すようにする
 // サーバー側の実装の修正
 export const getArticle = async (articleId: string) => {
-  const article: ArticleData = await fetch(`${BASE_URL}/api/articles/${articleId}/edit`, {
+  const article = await fetch(`${BASE_URL}/api/articles/${articleId}/edit`, {
     method: "GET",
-  }).then(res => res.json())
+  })
   return article
 }
 

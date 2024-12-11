@@ -1,26 +1,29 @@
 import { db } from "@/db/db";
+import { Post } from "@prisma/client";
+import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
-
 
 export async function GET(request: Request, { params }: { params: { articleId: string } }) {
   const { articleId } = params;
-  console.log('記事のID', articleId)
-
   try {
-    const article = await db.post.findUnique({
+    const article: Post | null = await db.post.findUnique({
       where: {
         id: articleId,
       },
     });
-
-    if (!article) {
-      return NextResponse.json({ error: "Article not found" }, { status: 404 });
+    if (article === null) {
+      const newArticleId: string = randomUUID();
+      return NextResponse.json({ id: newArticleId, title: "", content: "", published: false });
     }
 
-    console.log('記事API側', article)
     return NextResponse.json(article);
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 });
+    if (error instanceof Error) {
+      console.error('Error fetching article:', error.message);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    console.error('Unexpected error:', error);
+    return NextResponse.json({ error: 'An unexpected error occurred' }, { status: 500 });
   }
 }

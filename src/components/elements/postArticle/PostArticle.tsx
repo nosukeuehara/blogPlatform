@@ -2,22 +2,31 @@
 import { generateNewArticle } from "@/feature/action";
 import styles from "./postArticle.module.css";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-const PostArtile = () => {
+const PostArticle = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <div>
       <button
         onClick={async () => {
-          const slug = await generateNewArticle();
-          router.push(`/articles/${slug}/edit`);
+          setIsLoading(true); // ローディング状態に設定
+          try {
+            const slug = await generateNewArticle();
+            router.push(`/articles/${slug}/edit`);
+          } catch (error) {
+            console.error("記事の作成中にエラーが発生しました:", error);
+          }
         }}
         className={`${styles.newPostBtn}`}
+        disabled={isLoading} // ローディング中はボタンを無効化
       >
-        投稿する
+        {isLoading ? "作成中..." : "投稿する"}
       </button>
     </div>
   );
 };
 
-export default PostArtile;
+export default PostArticle;
