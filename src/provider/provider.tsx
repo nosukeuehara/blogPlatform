@@ -31,7 +31,6 @@ const DocContext = createContext<{
   setDoc: (value: ArticleDoc) => void;
 } | null>(null);
 
-// TODO: 新規で記事作成時にかなり時間がかかるので原因の調査
 export const DocProvider = ({
   defaulteArticle,
   children,

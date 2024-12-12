@@ -4,7 +4,6 @@ import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request, { params }: { params: { articleId: string } }) {
-  console.log('キキジ')
   const { articleId } = params;
   try {
     const article: Post | null = await db.post.findUnique({
