@@ -1,6 +1,7 @@
 "use client";
 import useMarkdownEditor from "@/hooks/useMarkdownEditor";
 import { useDocContext } from "@/provider/provider";
+import styles from "./markdownEditor.module.css";
 
 const MarkdownEditor = ({ postId }: { postId: string }) => {
   const [doc, setDoc] = useDocContext();
@@ -15,6 +16,9 @@ const MarkdownEditor = ({ postId }: { postId: string }) => {
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       <div>
         <input
+          autoFocus
+          className={styles.titleInput}
+          placeholder="Title"
           type="text"
           value={doc.title}
           onChange={(e) =>

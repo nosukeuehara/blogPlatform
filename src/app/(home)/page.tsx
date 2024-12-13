@@ -1,3 +1,18 @@
-export default function Home() {
-  return <div>この部分はすべての記事を出力。一般も見える</div>;
+import AarticleCard from "@/components/elements/pubArtticle/ArticleCard";
+import { getAllArticles } from "@/feature/action";
+import { ArticleData } from "@/types/types";
+
+export default async function Home() {
+  const articles: ArticleData[] = await getAllArticles();
+  return (
+    <div>
+      {articles.map((article) => {
+        return (
+          <div key={article.id}>
+            <AarticleCard article={article} />
+          </div>
+        );
+      })}
+    </div>
+  );
 }
