@@ -10,11 +10,10 @@
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   overflow: hidden;
-  border-radius: var(--rounded-xs);
+  border-radius: 0.2rem;
   background-color: rgb(241, 241, 241);
   box-shadow: 0 0 0 1px #96a3b31a, 0 8px 28px -4px #96a3b34d;
   z-index: 250;
-
   position: absolute;
   top: 30px;
   right: 0px;
@@ -48,5 +47,5 @@
 }
 
 .deleteBtn:hover {
-  background-color: color-mix(in srgb, #d40000 30%, white);
+  background-color: color-mix(in srgb, #d40000 14%, white);
 }
