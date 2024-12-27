@@ -25,6 +25,7 @@ a {
 }
 
 button,
-a :hover {
+a {
   cursor: pointer;
+  border: none;
 }

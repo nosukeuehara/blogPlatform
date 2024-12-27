@@ -13,7 +13,7 @@ const MyArticle = ({ props }: { props: ArticleData[] }) => {
             <Link href={`/articles/${article.id}/edit`}>
               <div>{article.title}</div>
             </Link>
-            <PopoverButtonSet />
+            <PopoverButtonSet articleId={article.id} />
           </article>
         );
       })}

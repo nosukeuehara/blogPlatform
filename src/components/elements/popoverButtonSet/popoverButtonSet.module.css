@@ -5,3 +5,48 @@
 .menuButton {
   border: none;
 }
+
+.popoverMenue {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  border-radius: var(--rounded-xs);
+  background-color: rgb(241, 241, 241);
+  box-shadow: 0 0 0 1px #96a3b31a, 0 8px 28px -4px #96a3b34d;
+  z-index: 250;
+
+  position: absolute;
+  top: 30px;
+  right: 0px;
+}
+
+.fadeInUp {
+  opacity: 0;
+  transform: translateY(10px);
+  animation-name: fadeIn;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+.deleteBtn {
+  width: 8rem;
+  height: 3rem;
+}
+
+.deleteBtn > span {
+  color: #d40000;
+  font-size: 1rem;
+}
+
+.deleteBtn:hover {
+  background-color: color-mix(in srgb, #d40000 30%, white);
+}
