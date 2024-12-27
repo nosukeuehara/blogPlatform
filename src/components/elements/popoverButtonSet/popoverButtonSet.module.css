@@ -1,0 +1,7 @@
+.menuButtonContainer {
+  display: flex;
+}
+
+.menuButton {
+  border: none;
+}

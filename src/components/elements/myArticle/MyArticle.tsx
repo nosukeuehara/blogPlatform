@@ -2,6 +2,7 @@ import { ArticleData } from "@/types/types";
 import Link from "next/link";
 import React from "react";
 import styles from "./myArticle.module.css";
+import PopoverButtonSet from "../popoverButtonSet/PopoverButtonSet";
 
 const MyArticle = ({ props }: { props: ArticleData[] }) => {
   return (
@@ -12,6 +13,7 @@ const MyArticle = ({ props }: { props: ArticleData[] }) => {
             <Link href={`/articles/${article.id}/edit`}>
               <div>{article.title}</div>
             </Link>
+            <PopoverButtonSet />
           </article>
         );
       })}

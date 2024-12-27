@@ -16,9 +16,15 @@ body {
   padding: 0;
   margin: 0;
   border-color: black;
+  background-color: unset;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+button,
+a :hover {
+  cursor: pointer;
 }

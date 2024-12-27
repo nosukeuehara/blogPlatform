@@ -47,7 +47,9 @@ export const saveArticle = async (articleData: ArticleData) => {
 };
 
 export const getAllArticles = async () => {
-  const articles: ArticleData[] = await fetch(`${BASE_URL}/api/dashboard`).then(
+  const articles: ArticleData[] = await fetch(`${BASE_URL}/api/dashboard`, {
+    cache: "no-store"
+  }).then(
     (res) => res.json()
   );
   return articles;
