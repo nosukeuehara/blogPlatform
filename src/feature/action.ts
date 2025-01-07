@@ -7,7 +7,7 @@ const BASE_URL =
 
 // 記事新規作成
 export const generateNewArticle = async () => {
-  const { slug } = await fetch(`${BASE_URL}/api/article/new`, {
+  const { slug } = await fetch(`${BASE_URL}/api/articles`, {
     method: "POST",
   }).then((res) => res.json());
   return slug;
@@ -15,14 +15,16 @@ export const generateNewArticle = async () => {
 
 export const getArticle = async (articleId: string) => {
   const article = await fetch(`${BASE_URL}/api/articles/${articleId}/edit`, {
+    cache: "no-cache",
     method: "GET",
   })
   return article
 }
 
+// 記事を編集した際に最新の記事のデータが取得できないのでキャッシュ回りの改善必須
 export const saveArticle = async (articleData: ArticleData) => {
   try {
-    const res = await fetch(`${BASE_URL}/api/article/save`, {
+    const res = await fetch(`${BASE_URL}/api/articles/${articleData.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -1,6 +1,5 @@
 import { db } from "@/db/db";
 import { Post } from "@prisma/client";
-import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request, { params }: { params: { articleId: string } }) {
@@ -11,10 +10,9 @@ export async function GET(request: Request, { params }: { params: { articleId: s
         id: articleId,
       },
     });
-    console.log(article)
+
     if (article === null) {
-      const newArticleId: string = randomUUID();
-      return NextResponse.json({ id: newArticleId, title: "", content: "", published: false });
+      return NextResponse.json({ id: articleId, title: "", content: "", published: false });
     }
 
     return NextResponse.json(article);

@@ -13,6 +13,7 @@ const fetchArticleById = async (postid: string): Promise<ArticleData> => {
   if (!response) {
     throw new Error("記事の取得に失敗しました");
   }
+  console.log("記事の取得をしました。", response);
   return response;
 };
 
