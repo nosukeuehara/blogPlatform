@@ -1,16 +1,43 @@
 "use client";
 import useMarkdownEditor from "@/hooks/useMarkdownEditor";
-import { useDocContext } from "@/provider/provider";
+import { useDocContext, useUpdatedMdContext } from "@/provider/provider";
 import styles from "./markdownEditor.module.css";
+import { useCallback, useEffect } from "react";
+import { saveArticle } from "@/feature/action";
 
 const MarkdownEditor = ({ postId }: { postId: string }) => {
   const [doc, setDoc] = useDocContext();
+  const setSaveStatus = useUpdatedMdContext()[1];
 
   const { editor } = useMarkdownEditor({
     articleId: postId,
     doc,
     setDoc,
   });
+
+  const save = useCallback(async () => {
+    if (doc === null) return;
+    await saveArticle({
+      id: postId,
+      ...doc,
+    });
+  }, [postId, doc]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.key === "s") {
+        e.preventDefault();
+        setSaveStatus("saved");
+        save();
+        console.log("Document marked as unsaved");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [save, setSaveStatus]);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
@@ -21,12 +48,13 @@ const MarkdownEditor = ({ postId }: { postId: string }) => {
           placeholder="Title"
           type="text"
           value={doc.title}
-          onChange={(e) =>
+          onChange={(e) => {
             setDoc({
               ...doc,
               title: e.target.value,
-            })
-          }
+            });
+            setSaveStatus("unsaved");
+          }}
         />
         <h3>Markdown Editor</h3>
         <div>
