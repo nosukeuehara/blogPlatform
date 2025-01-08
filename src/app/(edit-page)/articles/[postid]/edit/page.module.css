@@ -1,4 +1,10 @@
-.editHeader {
+.layout_editorMainContent {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.block_editorHeader {
   height: 62px;
   align-content: center;
 }

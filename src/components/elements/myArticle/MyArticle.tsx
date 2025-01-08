@@ -9,7 +9,7 @@ const MyArticle = ({ props }: { props: ArticleData[] }) => {
     <div>
       {props.map((article) => {
         return (
-          <article key={article.id} className={styles.myArticleCard}>
+          <article key={article.id} className={styles.block_myArticleCard}>
             <Link href={`/articles/${article.id}/edit`}>
               <div>{article.title}</div>
             </Link>

@@ -21,15 +21,17 @@ export const useMarkdownEditor = ({
   const editor = useRef<HTMLDivElement | null>(null);
   const [container, setContainer] = useState<HTMLDivElement>();
   const [view, setView] = useState<EditorView>();
-  const setSaveStatus = useUpdatedMdContext()[1];
+  const [saveState, setSaveStatus] = useUpdatedMdContext();
 
   const save = useCallback(async () => {
     if (doc === null) return;
+    if (saveState === "saved") return;
     await saveArticle({
       id: articleId,
       ...doc,
     });
-  }, [articleId, doc]);
+    setSaveStatus("saved");
+  }, [articleId, doc, saveState, setSaveStatus]);
 
   const customKeymap = useMemo(() => {
     return keymap.of([
@@ -37,12 +39,11 @@ export const useMarkdownEditor = ({
         key: "Mod-s",
         run() {
           save();
-          setSaveStatus("saved");
           return true;
         },
       },
     ]);
-  }, [save, setSaveStatus]);
+  }, [save]);
 
   const updateListener = useMemo(() => {
     return EditorView.updateListener.of((update: ViewUpdate) => {

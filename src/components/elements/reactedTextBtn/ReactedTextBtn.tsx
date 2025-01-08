@@ -15,9 +15,6 @@ const ReactedTextBtn = ({
   const [saveStatus, setSaveStatus] = useUpdatedMdContext();
   const [doc] = useDocContext();
 
-  switch (saveStatus) {
-    case "saved":
-  }
   return (
     <button
       onClick={async () => {
@@ -26,18 +23,15 @@ const ReactedTextBtn = ({
           return;
         }
 
+        if (saveStatus === "saved") return;
         await saveArticle({
           id: postid,
           ...doc,
         });
-
         setSaveStatus("saved");
       }}
-      className={
-        publishState || saveStatus === "unsaved"
-          ? `${styles.button_requestSave}`
-          : `${styles.button_saved}`
-      }
+      className={`${styles["bl-saveBtn"]} 
+      ${publishState || saveStatus === "unsaved" ? styles["--unSaved"] : null}`}
     >
       {children}
     </button>

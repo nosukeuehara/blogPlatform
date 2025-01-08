@@ -7,7 +7,7 @@ import { saveArticle } from "@/feature/action";
 
 const MarkdownEditor = ({ postId }: { postId: string }) => {
   const [doc, setDoc] = useDocContext();
-  const setSaveStatus = useUpdatedMdContext()[1];
+  const [saveState, setSaveStatus] = useUpdatedMdContext();
 
   const { editor } = useMarkdownEditor({
     articleId: postId,
@@ -17,11 +17,12 @@ const MarkdownEditor = ({ postId }: { postId: string }) => {
 
   const save = useCallback(async () => {
     if (doc === null) return;
+    if (saveState === "saved") return;
     await saveArticle({
       id: postId,
       ...doc,
     });
-  }, [postId, doc]);
+  }, [doc, saveState, postId]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

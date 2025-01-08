@@ -1,6 +1,6 @@
-.button_requestSave {
+.bl-saveBtn {
   border: none;
-  background-color: #1c98eb;
+  background-color: #666666;
   color: #fff;
   font-size: 1rem;
   font-weight: 400;
@@ -15,22 +15,16 @@
   transition: background-color 0.3s;
 }
 
-.button_requestSave:hover {
+.--unSaved {
+  background-color: #1c98eb;
+  color: #fff;
+}
+
+.--unSaved:hover {
   background-color: color-mix(in srgb, #1c98eb 90%, blue);
 }
 
-.button_saved {
-  border: none;
+/* .--saved {
   background-color: #666666;
   color: #fff;
-  font-size: 1rem;
-  font-weight: 400;
-  border-radius: 99rem;
-  padding: 0.5rem 1rem;
-  width: fit-content;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
+} */

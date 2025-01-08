@@ -30,9 +30,9 @@ const PopoverButtonSet = ({ articleId }: { articleId: string }) => {
   }, [isPopoverState]);
 
   return (
-    <div id={articleId} className={styles.menuButtonContainer} ref={popoverRef}>
+    <div id={articleId} className={styles["bl-menue"]} ref={popoverRef}>
       <button
-        className={styles.menuButton}
+        className={styles["bl-menue__btn"]}
         onClick={() => {
           setPopoverState(!isPopoverState);
         }}
@@ -40,16 +40,20 @@ const PopoverButtonSet = ({ articleId }: { articleId: string }) => {
         ・・・
       </button>
       {isPopoverState && (
-        <div className={`${styles.popoverMenue} ${styles.fadeInUp}`}>
+        <div
+          className={`${styles["bl-menue__popover"]} ${styles["--fadeInUp"]}`}
+        >
           <a rel="noopener noreferrer" target="_blank">
             <button
-              className={styles.deleteBtn}
+              className={styles["bl-menue__deleteBtn"]}
               onClick={() => {
                 deleteArticle({ id: articleId });
                 router.refresh(); // 記事削除に最新のページを取得する
               }}
             >
-              <span>削除する</span>
+              <span className={styles["bl-menue__deleteBtnText"]}>
+                削除する
+              </span>
             </button>
           </a>
         </div>

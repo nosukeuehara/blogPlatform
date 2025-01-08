@@ -1,4 +1,4 @@
-.newPostBtn {
+.bl-postBtn {
   width: fit-content;
   height: 36px;
   border-radius: 99rem;
@@ -12,6 +12,6 @@
   transition: background-color 0.3s;
 }
 
-.newPostBtn:hover {
+.bl-postBtn:hover {
   background-color: color-mix(in srgb, #1c98eb 90%, blue);
 }

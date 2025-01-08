@@ -1,12 +1,12 @@
-.menuButtonContainer {
+.bl-menue {
   display: flex;
 }
 
-.menuButton {
+.bl-menue__btn {
   border: none;
 }
 
-.popoverMenue {
+.bl-menue__popover {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   overflow: hidden;
@@ -19,7 +19,7 @@
   right: 0px;
 }
 
-.fadeInUp {
+.--fadeInUp {
   opacity: 0;
   transform: translateY(10px);
   animation-name: fadeIn;
@@ -36,16 +36,16 @@
   }
 }
 
-.deleteBtn {
+.bl-menue__deleteBtn {
   width: 8rem;
   height: 3rem;
 }
 
-.deleteBtn > span {
-  color: #d40000;
-  font-size: 1rem;
+.bl-menue__deleteBtn:hover {
+  background-color: color-mix(in srgb, #d40000 14%, white);
 }
 
-.deleteBtn:hover {
-  background-color: color-mix(in srgb, #d40000 14%, white);
+.bl-menue__deleteBtnText {
+  color: #d40000;
+  font-size: 1rem;
 }
