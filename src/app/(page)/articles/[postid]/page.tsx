@@ -6,6 +6,8 @@ type Param = {
   postid: string;
 };
 
+// 公開記事の表示
+// TODO : 公開記事のレイアウトの修正が必要
 const page = async ({ params }: { params: Promise<Param> }) => {
   const postId = (await params).postid;
   const articleData = await getArticle(postId).then((res) => res.json());
