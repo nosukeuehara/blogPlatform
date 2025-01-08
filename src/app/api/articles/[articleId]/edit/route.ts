@@ -10,7 +10,6 @@ export async function GET(request: Request, { params }: { params: { articleId: s
         id: articleId,
       },
     });
-
     if (article === null) {
       return NextResponse.json({ id: articleId, title: "", content: "", published: false });
     }

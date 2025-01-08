@@ -9,17 +9,18 @@ const SaveReturnBtn = () => {
   const [isUpdated] = useUpdatedMdContext();
   const router = useRouter();
 
-  // ページ遷移前に警告を表示
   const handleNavigation = (event: React.MouseEvent) => {
     if (isUpdated === "unsaved") {
       const confirmLeave = window.confirm(
         "変更が保存されていません。ページを移動しますか？"
       );
       if (!confirmLeave) {
-        return event.preventDefault(); // ユーザーが遷移をキャンセルした場合
+        return event.preventDefault();
       }
     }
     router.push("/dashboard");
+    // /dashboard のルートキャシュを更新
+    router.refresh();
   };
 
   return (

@@ -50,7 +50,7 @@ export const saveArticle = async (articleData: ArticleData) => {
 
 export const getAllArticles = async () => {
   const articles: ArticleData[] = await fetch(`${BASE_URL}/api/dashboard`, {
-    cache: "no-store" //TODO:この部分でたぶんエラーになる。たぶんRouteHandlerに対してno-storeが問題そう。修正必要
+    cache: "no-store"
   }).then(
     (res) => res.json()
   );
