@@ -15,4 +15,8 @@ export interface ArticleData extends ArticleDoc {
   id: string
 }
 
+export interface TargetData {
+  id: string,
+}
+
 export type SaveStatus = "saved" | "unsaved";

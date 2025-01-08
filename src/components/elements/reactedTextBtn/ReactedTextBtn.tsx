@@ -21,10 +21,16 @@ const ReactedTextBtn = ({
   return (
     <button
       onClick={async () => {
+        if (!doc.title) {
+          alert("記事の保存にはtitleが必要です");
+          return;
+        }
+
         await saveArticle({
           id: postid,
           ...doc,
         });
+
         setSaveStatus("saved");
       }}
       className={

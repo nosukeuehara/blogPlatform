@@ -1,4 +1,4 @@
-import { ArticleData } from "@/types/types";
+import { ArticleData, TargetData } from "@/types/types";
 
 const BASE_URL =
   typeof window === "undefined"
@@ -23,6 +23,7 @@ export const getArticle = async (articleId: string) => {
 
 // 記事を編集した際に最新の記事のデータが取得できないのでキャッシュ回りの改善必須
 export const saveArticle = async (articleData: ArticleData) => {
+  if (articleData.title == "") return false
   try {
     const res = await fetch(`${BASE_URL}/api/articles/${articleData.id}`, {
       method: "PUT",
@@ -56,3 +57,16 @@ export const getAllArticles = async () => {
   );
   return articles;
 };
+
+export const deleteArticle = async (targetData: TargetData) => {
+  try {
+    await fetch(`${BASE_URL}/api/articles/${targetData.id}`, {
+      method: "DELETE",
+      body: JSON.stringify({
+        id: targetData.id,
+      }),
+    })
+  } catch (error) {
+    throw new Error(`can not delete articles: ${error}`)
+  }
+}

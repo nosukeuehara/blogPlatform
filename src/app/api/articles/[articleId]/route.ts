@@ -46,13 +46,15 @@ export async function PUT(request: ArticleRequest) {
   }
 }
 
-export async function DELETE(targetId: string) {
+export async function DELETE(targetData: Targetrequest) {
+  const targetId = await targetData.json().then(res => res.id)
   try {
     await db.post.delete({
       where: {
         "id": targetId
       }
     })
+    return NextResponse.json({ status: 204, statusText: 'Success' });
   } catch (error) {
     throw new Error(`can not delete article[id:${targetId}]. message: ${error}`)
   }
@@ -63,4 +65,8 @@ interface ArticleRequest extends Request {
   title: string,
   content: string,
   published: boolean
+}
+
+interface Targetrequest extends Request {
+  targetId: string
 }
