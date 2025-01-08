@@ -6,7 +6,7 @@ const AarticleCard = ({ article }: { article: ArticleData }) => {
   return (
     // 記事を表示するためのページへのリンク
     //　TODO : ページの作成
-    <Link href={``}>
+    <Link href={`/articles/${article.id}`}>
       <div>{article.title}</div>
     </Link>
   );
