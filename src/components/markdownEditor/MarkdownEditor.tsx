@@ -41,26 +41,24 @@ const MarkdownEditor = ({ postId }: { postId: string }) => {
   }, [save, setSaveStatus]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div className={styles["bl_mdArea"]}>
+      <input
+        autoFocus
+        className={styles.bl_bdArea__titleInput}
+        placeholder="Title"
+        type="text"
+        value={doc.title}
+        onChange={(e) => {
+          setDoc({
+            ...doc,
+            title: e.target.value,
+          });
+          setSaveStatus("unsaved");
+        }}
+      />
+      <h3>Markdown Editor</h3>
       <div>
-        <input
-          autoFocus
-          className={styles.titleInput}
-          placeholder="Title"
-          type="text"
-          value={doc.title}
-          onChange={(e) => {
-            setDoc({
-              ...doc,
-              title: e.target.value,
-            });
-            setSaveStatus("unsaved");
-          }}
-        />
-        <h3>Markdown Editor</h3>
-        <div>
-          <div ref={editor} />
-        </div>
+        <div ref={editor} />
       </div>
     </div>
   );

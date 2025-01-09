@@ -1,4 +1,4 @@
-.ToggleSwitch {
+.bl_toggleSwitch {
   background: rgb(197, 197, 197);
   height: 27px;
   width: 46px;
@@ -11,7 +11,7 @@
   cursor: pointer;
 }
 
-.ToggleSwitch::after {
+.bl_toggleSwitch::after {
   position: relative;
   display: block;
   width: 21px;
@@ -23,10 +23,10 @@
   transition: all 0.2s ease;
 }
 
-.ToggleSwitchBg_active {
+.--bg_active {
   background: rgb(147, 190, 255);
 }
 
-.ToggleSwitchBg_active::after {
+.--bg_active::after {
   left: calc(50% - 1px);
 }

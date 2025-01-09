@@ -8,17 +8,12 @@ const ToggleSwitch = ({
   state: boolean;
   handleClick: () => void;
 }) => {
+  const btnStyle = state ? styles["--bg_active"] : null;
   return (
-    <div>
-      <button
-        className={
-          state
-            ? `${styles.ToggleSwitch} ${styles.ToggleSwitchBg_active}`
-            : `${styles.ToggleSwitch}`
-        }
-        onClick={() => handleClick()}
-      ></button>
-    </div>
+    <button
+      className={`${styles["bl_toggleSwitch"]} ${btnStyle}`}
+      onClick={() => handleClick()}
+    ></button>
   );
 };
 

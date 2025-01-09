@@ -6,9 +6,9 @@ import styles from "./header.module.css";
 
 const Header = () => {
   return (
-    <div className={styles.appHeaderInner}>
+    <div className={styles.bl_header}>
       <SiteIcon />
-      <div className={styles.headerContents}>
+      <div className={styles.bl_header__actionArea}>
         <SearchArticles />
         <PostArticle />
       </div>

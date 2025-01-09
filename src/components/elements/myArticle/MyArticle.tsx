@@ -6,7 +6,7 @@ import PopoverButtonSet from "../popoverButtonSet/PopoverButtonSet";
 
 const MyArticle = ({ props }: { props: ArticleData[] }) => {
   return (
-    <div>
+    <>
       {props.map((article) => {
         return (
           <article key={article.id} className={styles.block_myArticleCard}>
@@ -17,7 +17,7 @@ const MyArticle = ({ props }: { props: ArticleData[] }) => {
           </article>
         );
       })}
-    </div>
+    </>
   );
 };
 

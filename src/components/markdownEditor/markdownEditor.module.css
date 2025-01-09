@@ -1,24 +1,10 @@
-.textarea {
-  resize: none;
-  padding: 0.5rem;
-  font-size: 1.6rem;
-  border: none;
-  outline: none;
-  min-height: 544px;
-  max-height: none;
-  width: 768px;
-  border-radius: 1rem;
+.bl_mdArea {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.previewArea {
-  min-height: 544px;
-  width: 768px;
-  background: white;
-  border-radius: 1rem;
-  max-height: none;
-}
-
-.titleInput {
+.bl_bdArea__titleInput {
   height: 3rem;
   width: 100%;
   font-size: 2rem;

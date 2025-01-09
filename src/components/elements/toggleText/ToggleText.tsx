@@ -11,9 +11,9 @@ const ToggleText = ({
   falseState: string;
 }) => {
   if (state) {
-    return <span className={styles.text}>{trueState}</span>;
+    return <span className={styles.toggleText}>{trueState}</span>;
   } else {
-    return <span className={styles.text}>{falseState}</span>;
+    return <span className={styles.toggleText}>{falseState}</span>;
   }
 };
 

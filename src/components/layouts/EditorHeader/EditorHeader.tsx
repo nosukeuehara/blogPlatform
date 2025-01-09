@@ -4,7 +4,7 @@ import ToggleSwitch from "../../elements/toggleSwitch/TogglePublishSwitch";
 import ReactedTextBtn from "../../elements/reactedTextBtn/ReactedTextBtn";
 import ToggleText from "../../elements/toggleText/ToggleText";
 import styles from "./editorHeader.module.css";
-import SaveReturnBtn from "@/components/elements/saveReturnBtn/SaveReturnBtn";
+import ExitEditorBtn from "@/components/elements/exitEditorBtn/ExitEditorBtn";
 import { useDocContext } from "@/provider/provider";
 
 const EditorHeader = ({ postid }: { postid: string }) => {
@@ -17,8 +17,8 @@ const EditorHeader = ({ postid }: { postid: string }) => {
   }
 
   return (
-    <div className={styles.btnSet}>
-      <SaveReturnBtn />
+    <div className={styles.bl_editorTopBtns}>
+      <ExitEditorBtn />
       <ToggleSwitch state={doc.published} handleClick={handleClick} />
       <ToggleText
         state={doc.published}
