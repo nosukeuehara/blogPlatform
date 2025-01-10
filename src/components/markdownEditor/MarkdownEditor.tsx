@@ -2,8 +2,6 @@
 import useMarkdownEditor from "@/hooks/useMarkdownEditor";
 import { useDocContext, useUpdatedMdContext } from "@/provider/provider";
 import styles from "./markdownEditor.module.css";
-import { useCallback, useEffect } from "react";
-import { saveArticle } from "@/feature/action";
 
 const MarkdownEditor = ({ postId }: { postId: string }) => {
   const [doc, setDoc] = useDocContext();
@@ -14,31 +12,6 @@ const MarkdownEditor = ({ postId }: { postId: string }) => {
     doc,
     setDoc,
   });
-
-  const save = useCallback(async () => {
-    if (doc === null) return;
-    if (saveState === "saved") return;
-    await saveArticle({
-      id: postId,
-      ...doc,
-    });
-  }, [doc, saveState, postId]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key === "s") {
-        e.preventDefault();
-        setSaveStatus("saved");
-        save();
-        console.log("Document marked as unsaved");
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [save, setSaveStatus]);
 
   return (
     <div className={styles["bl_mdArea"]}>
